@@ -48,6 +48,13 @@ function moduleProject3() {
       card.appendChild(p)
     })
 
+    card.addEventListener('click', evt => {
+      document.querySelectorAll(".learner-card").forEach(card => {
+        card.classList.remove("active")
+      })
+      card.classList.add('active')
+    })
+
     return card;
   }
   
