@@ -28,8 +28,29 @@ function moduleProject3() {
 
   function buildLearnerCard(learner, languages) {
     //  ✨ do your magic here
-  }
+    const card = document.createElement("div")
+    card.classList.add("learner-card")
 
+    const nameP = document.createElement("p")
+    nameP.textContent = learner.fullName
+
+    const idElement = document.createElement("p")
+    idElement.textContent = `Learner ID: ${learner.id}`
+
+    const dobP = document.createElement("p")
+    dobP.textContent = `Date of Birth: ${learner.dateOfBirth}`
+    
+    const favLangP = document.createElement("p");
+    const favLanguage = languages.find(lang => lang.id === learner.favLanguage)
+    favLangP.textContent = `Favorite Language: ${favLanguage.name}`;
+    
+    [nameP, idElement, dobP, favLangP].forEach(p => {
+      card.appendChild(p)
+    })
+
+    return card;
+  }
+  
   {
     // 👉 TASK 2B - Use the two variables below to make learner Cards, and put them in the DOM
 
@@ -48,6 +69,10 @@ function moduleProject3() {
       { id: 17, fullName: 'Daniel Castillo', dateOfBirth: '1995-11-05', favLanguage: 12 }
     ]
     //  ✨ do your magic here
+    learners.forEach(learner => {
+      const learnerCard = buildLearnerCard(learner, languages)
+      document.querySelector("section").appendChild(learnerCard);
+    })
   }
 
   // 👉 TASK 3 - Write a `buildFooter` component that returns a footer
