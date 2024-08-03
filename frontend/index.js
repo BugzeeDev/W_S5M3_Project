@@ -48,6 +48,7 @@ function moduleProject3() {
       card.appendChild(p)
     })
 
+    // eslint-disable-next-line no-unused-vars
     card.addEventListener('click', evt => {
       document.querySelectorAll(".learner-card").forEach(card => {
         card.classList.remove("active")
@@ -86,7 +87,46 @@ function moduleProject3() {
 
   function buildFooter(footerData) {
     //  ✨ do your magic here
-    return document.createElement('footer')
+    const footer = document.createElement('footer')
+
+    const companyInfoDiv = document.createElement("div")
+    companyInfoDiv.classList.add("company-info")
+
+    const companyName = document.createElement("p")
+    companyName.classList.add("company-name")
+    companyName.textContent = footerData.companyName
+
+    const address = document.createElement("p")
+    address.classList.add("address")
+    address.textContent = footerData.address
+
+    const contactEmail = document.createElement("p")
+    contactEmail.classList.add("contact-email")
+    contactEmail.innerHTML = `Email: <a href="mailto: ${footerData.contactEmail}"> ${footerData.contactEmail}</a> `
+
+    companyInfoDiv.appendChild(companyName);
+    companyInfoDiv.appendChild(address);
+    companyInfoDiv.appendChild(contactEmail);
+
+    let socialMediaDiv = document.createElement("div")
+    socialMediaDiv.classList.add("social-media")
+
+    for (let platform in footerData.socialMedia) {
+      let socialMediaLink = document.createElement('a')
+      socialMediaLink.href = footerData.socialMedia[platform]
+      socialMediaLink.textContent = platform.charAt(0).toUpperCase() + platform.slice(1);
+      socialMediaDiv.appendChild(socialMediaLink);
+    }
+
+    let currentYear = new Date().getFullYear()
+    let copyright = document.createElement("div")
+    copyright.textContent = `© ${footerData.companyName.toUpperCase()} ${currentYear}`
+
+    footer.appendChild(companyInfoDiv);
+    footer.appendChild(socialMediaDiv);
+    footer.appendChild(copyright);
+    
+    return footer
   }
 
   // ❗ DOM creation using your `buildFooter` component (do not change):
@@ -104,6 +144,12 @@ function moduleProject3() {
   // 👉 TASK 4 - Clicking on the section should deactivate the active card
 
   //  ✨ do your magic here
+  document.addEventListener("click", evt => {
+    if (evt.target === document.querySelector('section')) {
+      const learners = document.querySelectorAll('.learner-card')
+      learners.forEach(card => card.classList.remove('active'))
+    }
+  })
 }
 
 // ❗ DO NOT CHANGE THIS CODE
