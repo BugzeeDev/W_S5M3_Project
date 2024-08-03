@@ -4,7 +4,15 @@ function moduleProject3() {
 
   function buildNav(links) {
     //  ✨ do your magic here
-    return document.createElement('nav')
+    const container = document.createElement('nav')
+    links.forEach(link => {
+      let a = document.createElement("a");
+      a.href = link.href;
+      a.title = link.title;
+      a.textContent = link.textContent;
+      container.appendChild(a);
+    })
+    return container
   }
 
   // ❗ DOM creation using your `buildNav` component (do not change):
